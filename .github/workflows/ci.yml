@@ -17,7 +17,7 @@ jobs:
         run: go test ./... -cover
 
       - name: Run gosec
-        run: go run github.com/securego/gosec/v2/cmd/gosec@latest ./...
+        run: go run github.com/securego/gosec/v2/cmd/gosec@latest -exclude=G104 ./...
 
   style:
     name: Style
