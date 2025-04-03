@@ -16,9 +16,9 @@ func respondWithError(w http.ResponseWriter, code int, msg string, logErr error)
 	type errorResponse struct {
 		Error string `json:"error"`
 	}
-	respondWithJSON(w, code, errorResponse{
-		Error: msg,
-	})
+	if err := respondWithJSON(w, code, errorResponse{Error: msg}); err != nil {
+		log.Printf("Failed to write error response: %v", err)
+	}
 }
 
 func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
@@ -30,9 +30,9 @@ func respondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 		return
 	}
 	w.WriteHeader(code)
-	_, err := w.Write(dat)
-        if err != nil {
-               return err
-        }
-        return nil
+	_, err = w.Write(dat)
+	if err != nil {
+		return err
+	}
+	return nil
 }
