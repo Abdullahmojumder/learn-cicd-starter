@@ -32,7 +32,8 @@ jobs:
 
       - name: Activate service account
         run: |
-          gcloud auth activate-service-account --key-file <(echo "${{ secrets.GCP_CREDENTIALS }}")
+          echo "${{ secrets.GCP_CREDENTIALS }}" > gcp-credentials.json
+          gcloud auth activate-service-account cloud-run-deployer@notely-455805.iam.gserviceaccount.com --key-file=gcp-credentials.json
 
       - name: Debug gcloud authentication
         run: |
