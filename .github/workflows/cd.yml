@@ -30,11 +30,6 @@ jobs:
           project_id: notely-455805
           export_default_credentials: true
 
-      - name: Activate service account
-        run: |
-          echo "${{ secrets.GCP_CREDENTIALS }}" > gcp-credentials.json
-          gcloud auth activate-service-account cloud-run-deployer@notely-455805.iam.gserviceaccount.com --key-file=gcp-credentials.json
-
       - name: Debug gcloud authentication
         run: |
           gcloud auth list
