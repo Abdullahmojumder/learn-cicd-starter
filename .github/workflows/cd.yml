@@ -48,6 +48,13 @@ jobs:
           which goose || echo "goose not found in PATH"
           goose --version
 
+      - name: Check migrations directory
+        run: |
+          ls -la migrations || echo "migrations directory not found"
+
+      - name: Test database connection
+        run: goose -dir migrations turso "$DATABASE_URL" status
+
       - name: Run database migrations
         run: goose -dir migrations turso "$DATABASE_URL" up
 
