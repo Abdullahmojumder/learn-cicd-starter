@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      GOOSE_DRIVER: turso
+      GOOSE_DRIVER: sqlite3
 
     steps:
       - name: Check out code
@@ -54,13 +54,13 @@ jobs:
 
       - name: Test database connection
         run: |
-          export GOOSE_DRIVER=turso
+          export GOOSE_DRIVER=sqlite3
           export GOOSE_DBSTRING="$DATABASE_URL"
           goose -dir migrations status
 
       - name: Run database migrations
         run: |
-          export GOOSE_DRIVER=turso
+          export GOOSE_DRIVER=sqlite3
           export GOOSE_DBSTRING="$DATABASE_URL"
           goose -dir migrations up
 
