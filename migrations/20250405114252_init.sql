@@ -1,6 +1,6 @@
 -- +goose Up
 -- +goose StatementBegin
-CREATE TABLE notes (
+CREATE TABLE IF NOT EXISTS notes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
@@ -10,5 +10,5 @@ CREATE TABLE notes (
 
 -- +goose Down
 -- +goose StatementBegin
-DROP TABLE notes;
+DROP TABLE IF EXISTS notes;
 -- +goose StatementEnd
